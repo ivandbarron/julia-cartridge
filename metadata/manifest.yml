@@ -5,6 +5,7 @@ Display-Name: "Julia Cartridge"
 Description: "julia cartridge"
 Source-Url: https://github.com/ivandavid77/julia-cartridge.git
 Cartridge-Vendor: ivandavid77@gmail.com
+Version: '0.3.10'
 Versions:
   - '0.3.10'
 Categories:  
