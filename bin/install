@@ -1,0 +1,7 @@
+#!/bin/bash -e
+
+cd $OPENSHIFT_JULIA_DIR/usr
+tar -xf julia.tag.gz
+./Install $OPENSHIFT_JULIA_DIR/usr
+
+exit 0
