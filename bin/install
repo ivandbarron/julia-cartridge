@@ -1,7 +1,8 @@
 #!/bin/bash -e
 
 cd $OPENSHIFT_JULIA_DIR/usr
-tar -xf julia.tag.gz
-./Install $OPENSHIFT_JULIA_DIR/usr
+tar -xzf julia-0.3.10-linux-x86_64.tar.gz
+mv julia-c8ceeefcc1/* .
+rm -rf julia-c8ceeefcc1
 
 exit 0

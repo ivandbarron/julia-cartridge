@@ -1,0 +1,29 @@
+#!/bin/bash -eu
+
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+
+function catchall() {
+  return 0
+}
+
+case "$1" in
+  start)                catchall ;;
+  stop)                 catchall ;;
+  restart)              catchall ;;
+  status)               catchall ;;
+  reload)               catchall ;;
+  tidy)                 catchall ;;
+  pre-build)            catchall ;;
+  build)                catchall ;;
+  deploy)               catchall ;;
+  post-deploy)          catchall ;;
+  pre-snapshot)         catchall ;;
+  post-snapshot)        catchall ;;
+  pre-restore)          catchall ;;
+  post-restore)         catchall ;;
+  pre-repo-archive)     catchall ;;
+  update-configuration) catchall ;;
+  *)           exit 0
+esac
+
+exit 0
