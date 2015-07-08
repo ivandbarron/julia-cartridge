@@ -1,8 +1,8 @@
 Name: JULIA
 Cartridge-Short-Name: JULIA
 Cartridge-Version: '0.0.1'
-Display-Name: Julia Cartridge
-Description: "julia cartridge with webstack"
+Display-Name: "Julia Cartridge"
+Description: "julia cartridge"
 Source-Url: git@github.com:ivandavid77/julia-cartridge.git
 Cartridge-Vendor: ivandavid77@gmail.com
 Versions:
@@ -12,13 +12,7 @@ Categories:
   - web_framework
 Provides:
   - julia
-  - julia-v0.3
-  - Morsel
-  - Meddle
-  - WebSockets
-  - HttpServer
-  - HttpParser
-  - HttpCommon
+  - julia-v0.3.10
 Endpoints:
   - Private-IP-Name: IP
     Private-Port-Name: PORT
@@ -29,11 +23,6 @@ Endpoints:
     Mappings:
       - Frontend: ""
         Backend: ""
-      - Frontend: "ws"
-        Backend: "web_socket"
+      - Frontend: ""
+        Backend: ""
         Options: { "websocket" : true }
-Scaling:
-  Min: 1
-  Max: -1
-Metrics:
-  - uptime
