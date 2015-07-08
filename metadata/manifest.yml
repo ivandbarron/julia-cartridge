@@ -3,7 +3,7 @@ Cartridge-Short-Name: JULIA
 Cartridge-Version: '0.0.1'
 Display-Name: Julia Cartridge
 Description: "julia cartridge with webstack"
-Source-Url: https://github.com/ivandavid77/julia-cartridge.git
+Source-Url: git@github.com:ivandavid77/julia-cartridge.git
 Cartridge-Vendor: ivandavid77@gmail.com
 Versions:
   - '0.3.10'
