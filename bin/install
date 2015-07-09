@@ -7,7 +7,7 @@ mv julia-c8ceeefcc1/* .
 rm -rf julia-c8ceeefcc1
 rm -f julia-0.3.10-linux-x86_64.tar.gz
 cd $OPENSHIFT_JULIA_DIR
-mkdir .julia
+mkdir -p .julia/v0.3
 touch .julia_history
 
 exit 0

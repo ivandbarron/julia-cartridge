@@ -1,0 +1,3 @@
+#!/bin/bash -e
+
+julia -e 'Pkg.init(); Pkg.update()'
