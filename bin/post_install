@@ -1,6 +1,13 @@
 #!/bin/bash -e
 
 
+rm ~/git/julia.git/branches/deleteme
+rm ~/git/julia.git/objects/info/deleteme
+rm ~/git/julia.git/objects/pack/deleteme
+rm ~/git/julia.git/refs/heads/deleteme
+rm ~/git/julia.git/refs/tags/deleteme
+rm ~/git/julia.git/logs/heads/deleteme
+
 julia -e 'Pkg.init(); Pkg.update()'
 
 cd $OPENSHIFT_JULIA_DIR
