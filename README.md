@@ -11,10 +11,7 @@ https://raw.githubusercontent.com/ivandavid77/julia-cartridge/master/metadata/ma
 Once created login using ssh and type "julia".
 
 
-Preinstalled packages:
-  - DataFrames
-  - Morsel
-  - WebSockets
-  - Gadfly
-
-TODO: create example web application
+TODO: 
+* create tutorial
+* create example web application
+* preinstall all next packages: https://github.com/JuliaLang/JuliaBox/blob/master/PACKAGES.md
