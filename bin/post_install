@@ -1,3 +1,7 @@
 #!/bin/bash -e
 
 julia -e 'Pkg.init(); Pkg.update()'
+julia -e 'Pkg.add("DataFrames")'
+julia -e 'Pkg.add("Morsel")'
+julia -e 'Pkg.add("WebSockets")'
+julia -e 'Pkg.add("Gadfly")'
