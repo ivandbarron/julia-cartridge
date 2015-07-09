@@ -15,3 +15,4 @@ TODO:
 * create tutorial
 * create example web application
 * preinstall all next packages: https://github.com/JuliaLang/JuliaBox/blob/master/PACKAGES.md
+* make tools for easy deploy for parallel processing in openshift!
