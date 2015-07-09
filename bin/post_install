@@ -1,7 +1,8 @@
 #!/bin/bash -e
 
 
-cat > ~/install_packages.sh << EOF
+cd $OPENSHIFT_JULIA_DIR
+cat > install_packages.sh << EOF
 julia -e 'Pkg.init(); Pkg.update()'
 julia -e 'Pkg.add("DataFrames")'
 julia -e 'Pkg.add("Morsel")'
@@ -115,5 +116,5 @@ julia -e 'Pkg.add("BayesNets")'
 #julia -e 'Pkg.add("Zlib")'
 EOF
 
-chmod 0777 ~/install_packages.sh
+chmod 0777 install_packages.sh
 
