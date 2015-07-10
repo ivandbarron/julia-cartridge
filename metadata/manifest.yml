@@ -9,7 +9,7 @@ Version: '0.3.10'
 Versions:
   - '0.3.10'
 Categories:  
-  - julia
+  - service
   - web_framework
 Provides:
   - julia
@@ -20,13 +20,15 @@ Endpoints:
     Private-Port: 8080
     Public-Port-Name: PROXY_PORT
     Protocols: [http, ws]
-    Options: { "primary" : true }
+    Options: 
+      primary: true 
     Mappings:
       - Frontend: ""
         Backend: ""
-      - Frontend: ""
-        Backend: ""
-        Options: { "websocket" : true }
+        Options:
+          websocket: true
 Scaling:
   Min: 1
   Max: -1
+Metrics:
+  - uptime
