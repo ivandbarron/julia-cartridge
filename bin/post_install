@@ -2,16 +2,14 @@
 
 
 julia -e 'Pkg.init(); Pkg.update()'
+julia -e 'Pkg.add("HttpServer")'
+julia -e 'Pkg.add("DataFrames")'
 
 cd $OPENSHIFT_JULIA_DIR
 cat > install_packages.sh << EOF
-julia -e 'Pkg.add("DataFrames")'
-julia -e 'Pkg.add("Morsel")'
 julia -e 'Pkg.add("WebSockets")'
 julia -e 'Pkg.add("Gadfly")'
-
 julia -e 'Pkg.add("BayesNets")'
-
 #julia -e 'Pkg.add("Cairo")'
 #julia -e 'Pkg.add("Clp")'
 #julia -e 'Pkg.add("Clustering")'
@@ -118,4 +116,3 @@ julia -e 'Pkg.add("BayesNets")'
 EOF
 
 chmod 0777 install_packages.sh
-

@@ -2,9 +2,50 @@
 
 
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
+pid_file="${OPENSHIFT_JULIA_DIR}julia.pid"
 
 function catchall() {
   return 0
+}
+
+function start() {
+  if is_running; then
+    echo "application $OPENSHIFT_APP_NAME is already running"
+    exit 1
+  fi
+  cd $OPENSHIFT_REPO_DIR
+  if [ -f start.sh ]; then
+    echo "Starting $OPENSHIFT_APP_NAME"
+    nohup ./start.sh
+    npid=$(/sbin/pidof start.sh)
+    echo "$npid" > "$pid_file"
+  fi
+  echo "started $OPENSHIFT_APP_NAME"
+}
+
+function stop() {
+ echo "stopping $OPENSHIFT_APP_NAME application"
+  cd $OPENSHIFT_REPO_DIR
+  if [ -f $pid_file ]; then
+    npid=$(cat $pid_file 2> /dev/null)
+    if [ -n "$npid" ]; then
+      echo "stopping $OPENSHIFT_APP_NAME"
+      kill "$npid"
+    fi
+  else
+    npid=$(/sbin/pidof start.sh)
+    if [ -n "$npid" ]; then
+      echo "stopping julia application"
+      kill "$npid"
+    fi
+  fi
+  echo "$OPENSHIFT_APP_NAME application stopped"
+  rm -f $pid_file
+}
+
+function restart() {
+  stop
+  start
 }
 
 case "$1" in
