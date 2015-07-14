@@ -1,4 +1,3 @@
-#!/usr/bin/env julia
 using HttpServer
 using Meddle
 using HttpCommon
