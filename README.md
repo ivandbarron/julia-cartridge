@@ -59,7 +59,7 @@ By default every file that begins with dot not be showed:
 <pre><code>http://my_project_name-your_user.rhcloud.com/.server.jl   # 403 - Forbidden</code></pre>
 
 
-You must edit <strong>.server.jl</strong> for adding your own content! You can see the original code at https://github.com/ivandavid77/julia-cartridge/blob/master/template/.server.jl
+You must edit <strong>.server.jl</strong> for adding your own content! You can see the original code at https://github.com/ivandavid77/julia-cartridge/blob/master/template/.server.jl, it was created using Meddle package from http://juliawebstack.org/
 
 
 ##TODO: 
