@@ -60,7 +60,7 @@ By default every file that begins with dot not be showed:
 
 
 
-You must edit <strong>.server.jl</strong> for adding your own content!
+You must edit <strong>.server.jl</strong> for adding your own content! You can see the original code at https://github.com/ivandavid77/julia-cartridge/blob/master/template/.server.jl
 
 
 ##TODO: 
