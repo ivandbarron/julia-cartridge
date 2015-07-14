@@ -46,10 +46,10 @@ julia></code></pre>
 From Red-Hat client:
 <pre><code>~ $ rhc app start -a my_project_name</code></pre>
 
-From ssh connection, inside openshift terminal:
+Or from ssh connection, inside openshift terminal:
 <pre><code>[my_project_name-your_user.rhcloud.com 55a5cdf...]\> gear start</code></pre>
 
-Test the next urls in your browser:
+Now you can test the next urls in your browser:
 <pre><code>http://my_project_name-your_user.rhcloud.com
 http://my_project_name-your_user.rhcloud.com/index.html
 http://my_project_name-your_user.rhcloud.com/about
@@ -57,7 +57,6 @@ http://my_project_name-your_user.rhcloud.com/static/test.html</code></pre>
 
 By default every file that begins with dot not be showed:
 <pre><code>http://my_project_name-your_user.rhcloud.com/.server.jl   # 403 - Forbidden</code></pre>
-
 
 
 You must edit <strong>.server.jl</strong> for adding your own content! You can see the original code at https://github.com/ivandavid77/julia-cartridge/blob/master/template/.server.jl
