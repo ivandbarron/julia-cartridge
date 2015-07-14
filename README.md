@@ -9,7 +9,7 @@ Provide the next URL for cartridge definition when create a new application:
 https://raw.githubusercontent.com/ivandavid77/julia-cartridge/master/metadata/manifest.yml
 
 ##Example 
-The most convenient way for use this cartridge it's using Red-Hat Client (Installation, configuration and further info can be found in https://developers.openshift.com/en/managing-client-tools.html), we do the next things:
+The most convenient way for use this cartridge it's using Red-Hat Client (Installation, configuration and further info can be found in https://developers.openshift.com/en/managing-client-tools.html), we'll do next things:
 * Create your application
 * Login and using julia
 * Optionally start the web server and test
