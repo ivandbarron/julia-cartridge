@@ -55,7 +55,7 @@ http://my_project_name-your_user.rhcloud.com/index.html
 http://my_project_name-your_user.rhcloud.com/about
 http://my_project_name-your_user.rhcloud.com/static/test.html</code></pre>
 
-By default every file that begins with dot not be showed:
+By default every file that begins with dot will not be showed:
 <pre><code>http://my_project_name-your_user.rhcloud.com/.server.jl   # 403 - Forbidden</code></pre>
 
 
