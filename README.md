@@ -15,6 +15,7 @@ The most convenient way for use this cartridge it's using Red-Hat Client (Instal
 * Optionally start the web server and test
 
 #### Create your application
+Open your terminal and type:
 <pre><code>~ $ rhc app create my_project_name https://raw.githubusercontent.com/ivandavid77/julia-cartridge/master/metadata/manifest.yml
 Your application 'my_project_name' is now available.
   URL:        http://my_project_name-your_user.rhcloud.com/
@@ -23,9 +24,11 @@ Your application 'my_project_name' is now available.
 .git/
   Cloned to:  ~/my_project_name
 </code></pre>
+Here "my_project_name" is the project's name that you choose, "your_user" is the username registered at openshift
+
 
 #### Login and using julia
-<pre><code>~ $ rhc ssh my-project-name
+<pre><code>~ $ rhc ssh my_project_name
 Connecting to 55a5cdf...@my_project_name-your_user.rhcloud.com ...
 [my_project_name-your_user.rhcloud.com 55a5cdf...]\> julia  # now type julia!
                _
@@ -43,23 +46,21 @@ julia></code></pre>
 From Red-Hat client:
 <pre><code>~ $ rhc app start -a my_project_name</code></pre>
 
-Inside openshift instance via ssh:
+From ssh connection, inside openshift terminal:
 <pre><code>[my_project_name-your_user.rhcloud.com 55a5cdf...]\> gear start</code></pre>
 
 Test the next urls in your browser:
-<pre><code>
-http://my_project_name-your_user.rhcloud.com
+<pre><code>http://my_project_name-your_user.rhcloud.com
 http://my_project_name-your_user.rhcloud.com/index.html
 http://my_project_name-your_user.rhcloud.com/about
-http://my_project_name-your_user.rhcloud.com/static/test.html
-</code></pre>
+http://my_project_name-your_user.rhcloud.com/static/test.html</code></pre>
 
 By default every file that begins with dot not be showed:
-<pre><code>
-http://my_project_name-your_user.rhcloud.com/.server.jl   # 403 - Forbidden
-</code></pre>
+<pre><code>http://my_project_name-your_user.rhcloud.com/.server.jl   # 403 - Forbidden</code></pre>
 
-You must edit .server.jl for adding your own content!
+
+
+You must edit <strong>.server.jl</strong> for adding your own content!
 
 
 ##TODO: 
