@@ -6,6 +6,8 @@ julia -e 'Pkg.add("HttpServer")'
 julia -e 'Pkg.add("Meddle")'
 julia -e 'Pkg.add("WebSockets")'
 
+gear restart
+
 cd $OPENSHIFT_JULIA_DIR
 cat > install_packages.sh << EOF
 #julia -e 'Pkg.add("BayesNets")'
