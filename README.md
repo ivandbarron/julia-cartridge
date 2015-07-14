@@ -43,7 +43,9 @@ Connecting to 55a5cdf...@my_project_name-your_user.rhcloud.com ...
 julia></code></pre>
 
 #### Start web server
-From Red-Hat client:
+If not already started, you can start web server with:
+
+Using Red-Hat client:
 <pre><code>~ $ rhc app start -a my_project_name</code></pre>
 
 Or from ssh connection, inside openshift terminal:
