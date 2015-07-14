@@ -63,7 +63,7 @@ You must edit <strong>.server.jl</strong> for adding your own content! You can s
 
 
 ##TODO: 
-* Enable web sockets in web server and migrate to Morsel
+* Enable web sockets in web server and migrate from Meddle to Morsel package
 * Make tools for easy deploy for parallel processing in openshift
 
 Suggested by @Ismael-VC:
