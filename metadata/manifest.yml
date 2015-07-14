@@ -6,8 +6,6 @@ Description: "julia cartridge"
 Source-Url: https://github.com/ivandavid77/julia-cartridge.git
 Cartridge-Vendor: ivandavid
 Version: '0.3.10'
-Versions:
-  - '0.3.10'
 Categories:  
   - service
   - web_framework
