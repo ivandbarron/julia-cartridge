@@ -8,7 +8,7 @@ Julia Openshift Cartridge
 Provide the next URL for cartridge definition when create a new application:
 https://raw.githubusercontent.com/ivandavid77/julia-cartridge/master/metadata/manifest.yml
 
-##Example 
+##Example
 The most convenient way for use this cartridge it's using Red-Hat Client (Installation, configuration and further info can be found in https://developers.openshift.com/en/managing-client-tools.html), we'll do next things:
 * Create your application
 * Login and using julia
@@ -61,13 +61,16 @@ By default every file that begins with dot will not be showed:
 <pre><code>http://my_project_name-your_user.rhcloud.com/.server.jl   # 403 - Forbidden</code></pre>
 
 
+Also on index.html you can confirm that is available websockets too, check you browser's javascript console and html of this page.
+
+
 You must edit <strong>.server.jl</strong> for adding your own content! You can see the original code at https://github.com/ivandavid77/julia-cartridge/blob/master/template/.server.jl, it was created using Meddle package from http://juliawebstack.org/
 
 
-##TODO: 
-* Enable web sockets in web server and migrate from Meddle to Morsel package
+##TODO:
+* Migrate from Meddle to Morsel package
 * Make tools for easy deploy for parallel processing in openshift
 
 Suggested by @Ismael-VC:
 
-* preinstall all next packages: https://github.com/JuliaLang/JuliaBox/blob/master/PACKAGES.md 
+* preinstall all next packages: https://github.com/JuliaLang/JuliaBox/blob/master/PACKAGES.md

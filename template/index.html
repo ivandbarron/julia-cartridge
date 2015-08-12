@@ -7,14 +7,14 @@
     function makeSocket() {
         var socket = new WebSocket('ws://worker3-dbarron.rhcloud.com:8000','json');
         socket.addEventListener('open', function() {
-            console.log('conectado');
-            socket.send('prueba de envio');
+            console.log('connected');
+            socket.send('test');
         });
         socket.addEventListener('close', function(err) {
-            console.log('conexión cerrada:', err);
+            console.log('closed:', err);
         });
         socket.addEventListener('message', function(msg) {
-            console.log(msg.data);
+            console.log('message from server:', msg.data);
         });
         socket.addEventListener('error', function(err) {
             console.log('error:', err);
@@ -32,5 +32,6 @@
 </head>
 <body>
     <h1>It works!</h1>
+    <p>Check your browser development tools and confirm websocket connection too!</p>
 </body>
 </html>
