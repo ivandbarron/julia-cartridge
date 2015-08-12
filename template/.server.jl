@@ -64,26 +64,19 @@ http = HttpHandler() do req::Request, res::Response
   Meddle.handle(get_stack(), mreq, res)
 end
 
+host = getaddrinfo(ENV["OPENSHIFT_JULIA_HTTP_IP"])
+port = int(ENV["OPENSHIFT_JULIA_HTTP_PORT"])
+run(Server(http), host=host, port=port)
+
 
 #################### WEBSOCKET ####################
-global connections = Dict{Int,WebSocket}()
-
 ws = WebSocketHandler() do req, client
-    global connections
-    connections[client.id] = client
     while true
         msg = read(client)
-        println("message: $msg")
-        msg = bytestring(msg)
-        val = eval(parse(msg))
-        output = takebuf_string(Base.mystreamvar)
-        val = val == nothing ? "<br>" : val
-        write(client,"$val<br>$output")
+        write(client,"echo: $msg");
     end
 end
 
-#################### START ####################
-server = Server(http)
-host = getaddrinfo(ENV["OPENSHIFT_JULIA_IP"])
-port = int(ENV["OPENSHIFT_JULIA_PORT"])
-run(server, host=host, port=port)
+host = getaddrinfo(ENV["OPENSHIFT_JULIA_WS_IP"])
+port = int(ENV["OPENSHIFT_JULIA_WS_PORT"])
+run(Server(http), host=host, port=port)

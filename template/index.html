@@ -1,8 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8"/>
-    <title>Test Index</title>
+<meta charset="utf-8"/>
+<title>Test Index</title>
+<script>
+    function makeSocket() {
+        var socket = new WebSocket('ws://worker3-dbarron.rhcloud.com','json');
+        socket.addEventListener('open', function() {
+            console.log('conectado');
+            socket.send('prueba de envio');
+        });
+        socket.addEventListener('close', function(err) {
+            console.log('conexión cerrada:', err);
+        });
+        socket.addEventListener('message', function(msg) {
+            console.log(msg.data);
+        });
+        socket.addEventListener('error', function(err) {
+            console.log('error:', err);
+        });
+    }
+    function ready(fn) {
+        if (document.readyState != 'loading') {
+            fn();
+        } else {
+            document.addEventListener('DOMContentLoaded', fn);
+        }
+    }
+    ready(makeSocket);
+</script>
 </head>
 <body>
     <h1>It works!</h1>
