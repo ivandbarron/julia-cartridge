@@ -67,7 +67,7 @@ end
 #################### WEBSOCKET ####################
 ws = WebSocketHandler() do req, client
     while true
-        msg = read(client)
+        msg = join(map(char,read(client)))
         write(client,"echo: $msg");
     end
 end

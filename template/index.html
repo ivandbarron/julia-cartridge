@@ -5,10 +5,10 @@
 <title>Test Index</title>
 <script>
     function makeSocket() {
-        var socket = new WebSocket('ws://worker3-dbarron.rhcloud.com:8000','json');
+        var socket = new WebSocket('ws://'+location.host+':8000','json');
         socket.addEventListener('open', function() {
             console.log('connected');
-            socket.send('test');
+            socket.send('testing');
         });
         socket.addEventListener('close', function(err) {
             console.log('closed:', err);
