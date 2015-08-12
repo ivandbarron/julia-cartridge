@@ -13,30 +13,18 @@ Provides:
   - julia
   - julia-v0.3.10
 Endpoints:
-  - Private-IP-Name: HTTP_IP
-    Private-Port-Name: HTTP_PORT
+  - Private-IP-Name: IP
+    Private-Port-Name: PORT
     Private-Port: 8080
-    Public-Port-Name: HTTP_PROXY_PORT
-    Protocols: [http]
+    Public-Port-Name: PROXY_PORT
+    Protocols: [http, ws]
     Options: 
       primary: true 
     Mappings:
       - Frontend: ""
         Backend: ""
         Options:
-          websocket: false
-  - Private-IP-Name: WS_IP
-    Private-Port-Name: WS_PORT
-    Private-Port: 8081
-    Public-Port-Name: WS_PROXY_PORT
-    Protocols: [ws]
-    Options: 
-      primary: true 
-    Mappings:
-      - Frontend: ""
-        Backend: ""
-        Options:
-          websocket: true
+          websocket: true  
 Scaling:
   Min: 1
   Max: -1

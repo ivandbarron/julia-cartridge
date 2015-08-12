@@ -64,11 +64,6 @@ http = HttpHandler() do req::Request, res::Response
   Meddle.handle(get_stack(), mreq, res)
 end
 
-host = getaddrinfo(ENV["OPENSHIFT_JULIA_HTTP_IP"])
-port = int(ENV["OPENSHIFT_JULIA_HTTP_PORT"])
-run(Server(http), host=host, port=port)
-
-
 #################### WEBSOCKET ####################
 ws = WebSocketHandler() do req, client
     while true
@@ -77,6 +72,6 @@ ws = WebSocketHandler() do req, client
     end
 end
 
-host = getaddrinfo(ENV["OPENSHIFT_JULIA_WS_IP"])
-port = int(ENV["OPENSHIFT_JULIA_WS_PORT"])
-run(Server(ws), host=host, port=port)
+host = getaddrinfo(ENV["OPENSHIFT_JULIA_IP"])
+port = int(ENV["OPENSHIFT_JULIA_PORT"])
+run(Server(http, ws), host=host, port=port)

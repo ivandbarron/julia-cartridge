@@ -5,7 +5,7 @@
 <title>Test Index</title>
 <script>
     function makeSocket() {
-        var socket = new WebSocket('ws://worker3-dbarron.rhcloud.com','json');
+        var socket = new WebSocket('ws://worker3-dbarron.rhcloud.com:8000','json');
         socket.addEventListener('open', function() {
             console.log('conectado');
             socket.send('prueba de envio');
