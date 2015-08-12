@@ -79,4 +79,4 @@ end
 
 host = getaddrinfo(ENV["OPENSHIFT_JULIA_WS_IP"])
 port = int(ENV["OPENSHIFT_JULIA_WS_PORT"])
-run(Server(http), host=host, port=port)
+run(Server(ws), host=host, port=port)
