@@ -18,8 +18,11 @@
         });
         socket.addEventListener('message', function(msg) {
             var mandelbrot = JSON.parse(msg.data);
-            console.log(mandelbrot.data);
-            $( "#slider" ).slider( "enable" );
+            if (mandelbrot.ready) {
+                $( "#slider" ).slider( "enable" );
+            } else {
+                console.log(mandelbrot.data);
+            }
         });
         socket.addEventListener('error', function(err) {
             console.log('error:', err);

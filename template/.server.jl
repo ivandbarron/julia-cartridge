@@ -3,8 +3,7 @@ using Meddle
 using HttpCommon
 using WebSockets
 import JSON
-
-
+include(".mandelbrot.jl");
 
 
 #################### WEBSERVER ####################
@@ -69,13 +68,23 @@ end
 
 #################### WEBSOCKET ####################
 ws = WebSocketHandler() do req, client
-    while true
-        msg = join(map(char,read(client)))
-        number = JSON.parse(msg)["number"]
-        mandelbrot = Dict{String, Array{Int64,1}}()
-        mandelbrot["data"] = [number, number+1, number+2, number+3]
-        write(client,JSON.json(mandelbrot));
+  while true
+    msg = join(map(char,read(client)))
+    hash = JSON.parse(msg)
+    n = hash["number"]
+    w = hash["width"]
+    h = hash["height"]
+    c0 = -0.8+0.16im
+    mandelbrot = Dict{String, Int64}()
+    for y=1:h, x=1:w
+      c = complex((x-w/2)/(w/2), (y-h/2)/(w/2))
+      mandelbrot["data"] = juliaset(c, c0, 256)
+      mandelbrot["ready"] = false
+      write(client,JSON.json(mandelbrot))
     end
+    mandelbrot["ready"] = true
+    write(client,JSON.json(mandelbrot))
+  end
 end
 
 host = getaddrinfo(ENV["OPENSHIFT_JULIA_IP"])
