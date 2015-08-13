@@ -5,6 +5,7 @@ julia -e 'Pkg.init(); Pkg.update()'
 julia -e 'Pkg.add("HttpServer")'
 julia -e 'Pkg.add("Meddle")'
 julia -e 'Pkg.add("WebSockets")'
+julia -e 'Pkg.add("JSON")'
 
 cd $OPENSHIFT_JULIA_DIR
 cat > install_packages.sh << EOF

@@ -2,6 +2,9 @@ using HttpServer
 using Meddle
 using HttpCommon
 using WebSockets
+import JSON
+
+
 
 
 #################### WEBSERVER ####################
@@ -68,7 +71,10 @@ end
 ws = WebSocketHandler() do req, client
     while true
         msg = join(map(char,read(client)))
-        write(client,"echo: $msg");
+        number = JSON.parse(msg)["number"]
+        mandelbrot = Dict{String, Array{Int64,1}}()
+        mandelbrot["data"] = [number, number+1, number+2, number+3]
+        write(client,JSON.json(mandelbrot));
     end
 end
 

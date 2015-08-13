@@ -1,24 +1,30 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
 <meta charset="utf-8"/>
 <title>Test Index</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
     function makeSocket() {
         var socket = new WebSocket('ws://'+location.host+':8000','json');
         socket.addEventListener('open', function() {
             console.log('connected');
-            socket.send('testing');
+            $( "#slider" ).slider( "enable" );
         });
         socket.addEventListener('close', function(err) {
             console.log('closed:', err);
         });
         socket.addEventListener('message', function(msg) {
-            console.log('message from server:', msg.data);
+            var mandelbrot = JSON.parse(msg.data);
+            console.log(mandelbrot.data);
+            $( "#slider" ).slider( "enable" );
         });
         socket.addEventListener('error', function(err) {
             console.log('error:', err);
         });
+        return socket;
     }
     function ready(fn) {
         if (document.readyState != 'loading') {
@@ -27,11 +33,37 @@
             document.addEventListener('DOMContentLoaded', fn);
         }
     }
-    ready(makeSocket);
+    ready(function() {
+        var socket = makeSocket();
+        $( "#slider" ).slider({
+            min: 0,
+            max: 10,
+            step: 1,
+            disabled: true,
+            change: function( event, ui ) {
+                $( "#slider" ).slider( "disable" );
+                var data = {
+                    width: 800,
+                    height: 600,
+                    number: $( "#slider" ).slider( "value" )
+                };
+                socket.send(JSON.stringify(data));
+            }
+        });
+    });
 </script>
+<style>
+    #canvas {
+        width: 800px;
+        height: 600px;
+        border: solid;
+    }
+</style>
 </head>
 <body>
     <h1>It works!</h1>
     <p>Check your browser development tools and confirm websocket connection too!</p>
+    <div id="slider"></div>
+    <canvas id="canvas"></canvas>
 </body>
 </html>
