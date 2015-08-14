@@ -8,7 +8,8 @@
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
     function makeSocket() {
-        var socket = new WebSocket('ws://'+location.host+':8000','json');
+        var socket = new WebSocket('ws://'+location.host+':8000','arraybuffer');
+        socket.binaryType = "arraybuffer";
         socket.addEventListener('open', function() {
             console.log('connected');
             $( "#slider" ).slider( "enable" );
@@ -17,12 +18,11 @@
             console.log('closed:', err);
         });
         socket.addEventListener('message', function(msg) {
-            var mandelbrot = JSON.parse(msg.data);
-            if (mandelbrot.ready) {
-                $( "#slider" ).slider( "enable" );
-            } else {
-                console.log(mandelbrot.data);
+            if (msg.data instanceof ArrayBuffer) {
+                var a = new Uint8Array(msg.data);
+                console.log(a);
             }
+            $( "#slider" ).slider( "enable" );
         });
         socket.addEventListener('error', function(err) {
             console.log('error:', err);
@@ -45,20 +45,17 @@
             disabled: true,
             change: function( event, ui ) {
                 $( "#slider" ).slider( "disable" );
-                var data = {
-                    width: 800,
-                    height: 600,
-                    number: $( "#slider" ).slider( "value" )
-                };
-                socket.send(JSON.stringify(data));
+                var value = $( "#slider" ).slider( "value" );
+                console.log('sending: ', value);
+                socket.send(value);
             }
         });
     });
 </script>
 <style>
     #canvas {
-        width: 800px;
-        height: 600px;
+        width: 400px;
+        height: 300px;
         border: solid;
     }
 </style>

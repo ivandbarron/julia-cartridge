@@ -67,23 +67,27 @@ http = HttpHandler() do req::Request, res::Response
 end
 
 #################### WEBSOCKET ####################
+function write(ws::WebSocket, data::Array{Uint8})
+  if ws.is_closed
+    @show ws
+    error("attempt to write to closed WebSocket\n")
+  end
+  WebSockets.send_fragment(ws, true, data, 0b0010)
+end
+
+
 ws = WebSocketHandler() do req, client
   while true
-    msg = join(map(char,read(client)))
-    hash = JSON.parse(msg)
-    n = hash["number"]
-    w = hash["width"]
-    h = hash["height"]
+    data = char(read(client))
     c0 = -0.8+0.16im
-    mandelbrot = Dict{String, Int64}()
+    mandelbrot = Uint8[]
+    h = 300
+    w = 400
     for y=1:h, x=1:w
       c = complex((x-w/2)/(w/2), (y-h/2)/(w/2))
-      mandelbrot["data"] = juliaset(c, c0, 256)
-      mandelbrot["ready"] = false
-      write(client,JSON.json(mandelbrot))
+      push!(mandelbrot, juliaset(c, c0, 255))
     end
-    mandelbrot["ready"] = true
-    write(client,JSON.json(mandelbrot))
+    write(client, mandelbrot)
   end
 end
 

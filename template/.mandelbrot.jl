@@ -1,9 +1,11 @@
-function juliaset(z, z0, nmax::Int)
+function juliaset(z::Complex, z0::Complex, nmax::Int)
   for n = 1:nmax
     if abs(z) > 2
-      return n-1
+      return uint8(n-1)
     end
     z = z^2 + z0
   end
-  return nmax
+  return uint8(nmax)
 end
+
+
