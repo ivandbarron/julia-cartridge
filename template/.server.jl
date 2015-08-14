@@ -78,8 +78,9 @@ end
 
 ws = WebSocketHandler() do req, client
   while true
-    data = char(read(client))
-    c0 = -0.8+0.16im
+    data = read(client)
+    num = int(string(char(data[1])))
+    c0 = (-0.8-(num/10))+0.16im
     mandelbrot = Uint8[]
     h = 300
     w = 400
