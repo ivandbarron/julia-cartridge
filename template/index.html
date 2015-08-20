@@ -7,22 +7,59 @@
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
-    function makeSocket() {
+    function prepareCanvas(id) {
+        var canvas = document.getElementById(id);
+        var width = canvas.getAttribute('width');
+        var height = canvas.getAttribute('height');
+        var context = canvas.getContext('2d'); 
+        context.globalAlpha = 1;
+        context.fillStyle = '#000000';
+        context.fillRect(0,0,width,height);
+        return canvas;
+    }
+    function makeMessage(canvas, ecuationNumber) {
+        return {
+            width : canvas.getAttribute('width'),
+            height : canvas.getAttribute('height'),
+            num : ecuationNumber
+        }
+    }
+    function sendMessage(socket, message) {
+        console.log('sending: ', message);
+        socket.send(JSON.stringify(message));
+    }
+    function makeSocket(canvas) {
         var socket = new WebSocket('ws://'+location.host+':8000','arraybuffer');
         socket.binaryType = "arraybuffer";
         socket.addEventListener('open', function() {
             console.log('connected');
             $( "#slider" ).slider( "enable" );
-        });
-        socket.addEventListener('close', function(err) {
-            console.log('closed:', err);
+            var value = $( "#slider" ).slider( "value" );
+            sendMessage(socket, makeMessage(canvas, value));
         });
         socket.addEventListener('message', function(msg) {
             if (msg.data instanceof ArrayBuffer) {
-                var a = new Uint8Array(msg.data);
-                console.log(a);
+                var data = new Uint8Array(msg.data);
+                console.log('received',data);
+                var width = canvas.getAttribute('width');
+                var height = canvas.getAttribute('height');
+                var context = canvas.getContext('2d');
+                context.globalAlpha = 1;
+                context.fillStyle = '#000000';
+                context.fillRect(0,0,width,height);
+                context.fillStyle = '#888888';
+                var index = 0;
+                for (var i = 0; i < width; i++) {
+                    for (var j = 0; j < height; j++) {
+                        context.globalAlpha = data[index++]/255;
+                        context.fillRect(i,j,1,1);
+                    }
+                }
             }
             $( "#slider" ).slider( "enable" );
+        });
+        socket.addEventListener('close', function(err) {
+            console.log('closed:', err);
         });
         socket.addEventListener('error', function(err) {
             console.log('error:', err);
@@ -37,25 +74,23 @@
         }
     }
     ready(function() {
-        var socket = makeSocket();
+        var canvas = prepareCanvas('mandelbrot');
+        var socket = makeSocket(canvas);
         $( "#slider" ).slider({
-            min: 0,
+            min: 1,
             max: 10,
             step: 1,
             disabled: true,
             change: function( event, ui ) {
                 $( "#slider" ).slider( "disable" );
                 var value = $( "#slider" ).slider( "value" );
-                console.log('sending: ', value);
-                socket.send(value);
+                sendMessage(socket, makeMessage(canvas, value));
             }
         });
     });
 </script>
 <style>
-    #canvas {
-        width: 400px;
-        height: 300px;
+    #mandelbrot {
         border: solid;
     }
 </style>
@@ -64,6 +99,6 @@
     <h1>It works!</h1>
     <p>Check your browser development tools and confirm websocket connection too!</p>
     <div id="slider"></div>
-    <canvas id="canvas"></canvas>
+    <canvas id="mandelbrot" width="800" height="400"></canvas>
 </body>
 </html>

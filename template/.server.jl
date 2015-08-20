@@ -78,12 +78,24 @@ end
 
 ws = WebSocketHandler() do req, client
   while true
-    data = read(client)
-    num = int(string(char(data[1])))
-    c0 = (-0.8-(num/10))+0.16im
+    message = utf8(read(client))
+    args = JSON.parse(message)
+    ecuations = [
+      -0.8+0.16im,
+      -0.4+0.6im,
+      0.285+0im,
+      0.285+0.01im,
+      0.45+0.1428im,
+      -0.70176-0.3842im,
+      -0.835-0.2321im,
+      -0.8+0.156im,
+      -0.74543+0.11301im,
+      -0.1+0.651im
+    ]
+    c0 = ecuations[args["num"]]
     mandelbrot = Uint8[]
-    h = 300
-    w = 400
+    w = int(args["width"])
+    h = int(args["height"])
     for y=1:h, x=1:w
       c = complex((x-w/2)/(w/2), (y-h/2)/(w/2))
       push!(mandelbrot, juliaset(c, c0, 255))
