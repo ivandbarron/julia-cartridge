@@ -24,7 +24,11 @@ Endpoints:
       - Frontend: ""
         Backend: ""
         Options:
-          websocket: true  
+          websocket: true
+  - Private-IP-Name: IP
+    Private-Port-Name: WORKER_PORT
+    Private-Port: 9009
+    Public-Port-Name:  WORKER_PROXY_PORT  
 Scaling:
   Min: 1
   Max: -1
